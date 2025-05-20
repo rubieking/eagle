@@ -1,5 +1,7 @@
 SRC_FILES = $(shell find docker -type f)
-IMAGE_NAME = calibre:0.0.1
+IMAGE_NAME ?= calibre
+IMAGE_TAG = 0.0.1
+IMAGE = $(IMAGE_NAME):$(IMAGE_TAG)
 CONTAINER_NAME = calibre
 PWD ?= $(error PWD is not set)
 PREFIX = $(PWD)/bin
@@ -17,9 +19,13 @@ install: build
 	@bash -c 'if [[ ! -d $(PREFIX) ]]; then mkdir $(PREFIX); fi'
 	@echo '#!/usr/bin/env bash' > $(PREFIX)/calibre
 	@echo 'set -e' >> $(PREFIX)/calibre
-	@echo exec $(DOCKER) run --rm --name $(CONTAINER_NAME) -it $(IMAGE_NAME) >> $(PREFIX)/calibre
+	@echo exec $(DOCKER) run --rm --name $(CONTAINER_NAME) -it $(IMAGE) >> $(PREFIX)/calibre
 	@chmod +x $(PREFIX)/calibre
 
 .PHONY: push
 push: build
-	@$(DOCKER) push $(IMAGE_NAME):latest
+	@$(DOCKER) push $(IMAGE):latest
+
+.PHONY: run
+run: build
+	@$(DOCKER) run --rm --name $(CONTAINER_NAME) -it $(IMAGE_NAME)
