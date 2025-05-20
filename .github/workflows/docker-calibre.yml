@@ -1,0 +1,32 @@
+name: Build and Push calibre Docker image to GHCR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'podman_images/calibre/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push Docker image
+      working-directory: podman_images/calibre
+      run: |
+        IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/calibre make push
