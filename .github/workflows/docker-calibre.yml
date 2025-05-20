@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'podman_images/calibre/**'
+      - 'docker_images/calibre/**'
   workflow_dispatch:
 
 jobs:
@@ -27,6 +27,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and push Docker image
-      working-directory: podman_images/calibre
+      working-directory: docker_images/calibre
       run: |
         IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/calibre make push
