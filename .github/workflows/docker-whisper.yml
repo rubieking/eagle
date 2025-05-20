@@ -27,6 +27,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and push Docker image
-      working-directory: ./podman-images/whisper
+      working-directory: podman_images/whisper
       run: |
         IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/whisper make push
