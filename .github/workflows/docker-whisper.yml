@@ -1,8 +1,10 @@
-name: Build and Push Docker image to GHCR
+name: Build and Push whisper Docker image to GHCR
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'podman_images/whisper/**'
   workflow_dispatch:
 
 jobs:
@@ -25,5 +27,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and push Docker image
+      working-directory: ./podman-images/whisper
       run: |
         IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/whisper make push
