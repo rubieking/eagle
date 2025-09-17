@@ -29,4 +29,4 @@ jobs:
     - name: Build and push Docker image
       working-directory: docker_images/caddy
       run: |
-        IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/calibre make push
+        IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/caddy make push
