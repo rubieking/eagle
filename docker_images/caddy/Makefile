@@ -25,9 +25,9 @@ install: build
 
 .PHONY: push
 push: build
-	@$(DOCKER_ENGINE) push $(IMAGE_NAME):latest
-	@$(DOCKER_ENGINE) push $(IMAGE_NAME):$(TIME_TAG)
-	@$(DOCKER_ENGINE) push $(IMAGE)
+	$(DOCKER_ENGINE) push $(IMAGE_NAME):latest
+	$(DOCKER_ENGINE) push $(IMAGE_NAME):$(TIME_TAG)
+	$(DOCKER_ENGINE) push $(IMAGE)
 
 .PHONY: run
 run: build

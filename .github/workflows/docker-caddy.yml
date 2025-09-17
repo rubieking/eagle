@@ -1,4 +1,4 @@
-name: Build and Push calibre Docker image to GHCR
+name: Build and Push Caddy Docker image to GHCR
 
 on:
   push:
