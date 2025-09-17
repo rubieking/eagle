@@ -1,5 +1,5 @@
 SRC_FILES = $(shell find docker -type f)
-IMAGE_NAME = caddy
+IMAGE_NAME ?= caddy
 IMAGE_TAG = 0.0.1
 IMAGE = $(IMAGE_NAME):$(IMAGE_TAG)
 TIME_TAG = $(shell date '+%Y%m%d-%H%M%S')
